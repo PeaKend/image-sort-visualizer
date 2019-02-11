@@ -62,22 +62,24 @@ def init():
     while True:
 
         for i in range(7):
-            if img_unsorted_positions[i] > img_unsorted_positions[i+1]:
-                placeholder = img_unsorted_positions[i+1]
-#                print(placeholder)
-                img_unsorted_positions[i+1] = img_unsorted_positions[i]
-                img_unsorted_positions[i] = placeholder
-
-#                print(img_unsorted_positions)
-            if img_pos_y == 0:
-                index = 0
-                for n in range(min_range, max_range):
-                    screen.blit(imgs[n], (x[index], img_pos_y))
-                    img_pos_x += img_size
-                    img_unsorted_positions.append(x[index])
-                    index += 1 
-                
+            for j in range(7):
+                if img_unsorted_positions[j] > img_unsorted_positions[j+1]:
+                    placeholder = img_unsorted_positions[j]
+                    img_unsorted_positions[j] = img_unsorted_positions[j+1]
+                    img_unsorted_positions[j+1] = placeholder
+                    print(img_unsorted_positions)
+        if img_pos_y == 0:
+            index = 0
+        for n in range(min_range, max_range):
+            screen.blit(imgs[n], (img_unsorted_positions[n], img_pos_y))
+            img_pos_x += img_size
+            img_unsorted_positions.append(x[index])
+            index += 1 
+    
             pygame.display.update()
+            pygame.time.delay(100)
+            screen.fill((0, 0, 0))
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
 

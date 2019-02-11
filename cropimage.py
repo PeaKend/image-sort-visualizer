@@ -1,8 +1,13 @@
 #!/usr/bin/env python
 
 from PIL import Image
+import os
 
 def crop():
+    try:
+        os.makedirs("imgs/")
+    except FileExistsError:
+        pass
     im = Image.open("monalisa.jpg")
     im = im.resize((800, 800))
     img_width, img_height = im.size
