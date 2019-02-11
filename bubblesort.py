@@ -51,8 +51,6 @@ def init():
             img_pos_y += img_size
         if img_pos_y >= 800:
             break
-    while True:
-        pygame.display.update()
 
     min_range = 0
     max_range = 8
@@ -71,7 +69,7 @@ def init():
                 img_unsorted_positions[i] = placeholder
 
 #                print(img_unsorted_positions)
-            if image_pos_y == 0:
+            if img_pos_y == 0:
                 index = 0
                 for n in range(min_range, max_range):
                     screen.blit(imgs[n], (x[index], img_pos_y))
