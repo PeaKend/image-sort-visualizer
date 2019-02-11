@@ -57,27 +57,31 @@ def init():
     img_pos_x = 0
     img_pos_y = 0
     placeholder = 0
+    index = 0
+    y_index = 0 # this variable define what position in y should be rendered
 
     # sort image
     while True:
-
-        for i in range(7):
-            for j in range(7):
+    # this is linear rendering
+    # the array is wrong, take a look at a method from above
+        y_index = int(img_pos_y/100) * 7
+        print(y_index)
+        index = 0
+        for i in range(0, 7):
+            for j in range(0, 7):
                 if img_unsorted_positions[j] > img_unsorted_positions[j+1]:
                     placeholder = img_unsorted_positions[j]
                     img_unsorted_positions[j] = img_unsorted_positions[j+1]
                     img_unsorted_positions[j+1] = placeholder
                     print(img_unsorted_positions)
-        if img_pos_y == 0:
-            index = 0
         for n in range(min_range, max_range):
             screen.blit(imgs[n], (img_unsorted_positions[n], img_pos_y))
             img_pos_x += img_size
-            img_unsorted_positions.append(x[index])
             index += 1 
-    
             pygame.display.update()
             pygame.time.delay(100)
+        if img_pos_y >= 0 and img_pos_y < 700:
+            img_pos_y += 100
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
